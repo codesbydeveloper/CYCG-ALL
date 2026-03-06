@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Detail | Workforce Development | CYCG</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/svg/logo.svg" />
+    <link href="./output.css" rel="stylesheet">
+</head>
+<style>
+    #views-dropdown {
+        transition: height 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: height;
+    }
+
+    #view-detail-content {
+        color: rgba(235, 235, 235, 0.85);
+        font-weight: 400;
+    }
+
+    #view-detail-content h1,
+    #view-detail-content h2,
+    #view-detail-content h3,
+    #view-detail-content h4,
+    #view-detail-content h5,
+    #view-detail-content h6 {
+        color: #ffffff;
+        line-height: 1.2;
+        margin-top: 1.25rem;
+        margin-bottom: 0.75rem;
+        font-family: Kiona, "Kiona", sans-serif !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+    }
+
+    #view-detail-content h1 *,
+    #view-detail-content h2 *,
+    #view-detail-content h3 *,
+    #view-detail-content h4 *,
+    #view-detail-content h5 *,
+    #view-detail-content h6 * {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        text-transform: inherit !important;
+    }
+
+    #view-detail-content h1 {
+        font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+    }
+
+    #view-detail-content h2 {
+        font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+    }
+
+    #view-detail-content h3 {
+        font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    }
+
+    #view-detail-content h4 {
+        font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    }
+
+    #view-detail-content h5 {
+        font-size: 1.05rem;
+    }
+
+    #view-detail-content h6 {
+        font-size: 0.95rem;
+    }
+
+    #view-detail-content p {
+
+        font-weight: 400;
+    }
+
+    #view-detail-content a {
+        color: #3b82f6;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        word-break: break-word;
+    }
+
+    #view-detail-content a:hover {
+        color: #7bbdff;
+    }
+
+    #view-detail-content strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+
+    #view-detail-content .ql-size-small {
+        font-size: 0.875em;
+    }
+
+    #view-detail-content .ql-size-large {
+        font-size: 1.25em;
+    }
+
+    #view-detail-content .ql-size-huge {
+        font-size: 1.6em;
+    }
+
+    #view-detail-content blockquote {
+        border-left: 3px solid #3a3a3a;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        color: rgba(235, 235, 235, 0.75);
+    }
+
+    #view-detail-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 1rem 0;
+    }
+
+    #view-detail-content .ql-align-center {
+        text-align: center;
+    }
+
+    #view-detail-content .ql-align-right {
+        text-align: right;
+    }
+
+    #view-detail-content .ql-align-justify {
+        text-align: justify;
+    }
+
+
+    #view-detail-content ul,
+    #view-detail-content ol {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    #view-detail-content ul {
+        list-style: disc;
+    }
+
+    #view-detail-content ol {
+        list-style: decimal;
+    }
+
+    #view-detail-content li {
+        margin: 0.35rem 0;
+        color: rgba(235, 235, 235, 0.85);
+    }
+
+    #view-detail-content li>p {
+        margin: 0;
+    }
+
+    #view-detail-content ol li[data-list="bullet"] {
+        list-style: none;
+        position: relative;
+    }
+
+
+
+    #view-detail-content li[data-list="ordered"] {
+        list-style: decimal;
+    }
+
+    #view-detail-content li[data-list="checked"],
+    #view-detail-content li[data-list="unchecked"] {
+        list-style: none;
+        position: relative;
+    }
+
+    #view-detail-content li[data-list="checked"]::before,
+    #view-detail-content li[data-list="unchecked"]::before {
+        position: absolute;
+        left: -1.15rem;
+    }
+
+    #view-detail-content li[data-list="checked"]::before {
+        content: "\2611";
+    }
+
+    #view-detail-content li[data-list="unchecked"]::before {
+        content: "\2610";
+    }
+
+
+    #view-detail-content .ql-indent-1 {
+        padding-left: 1.5rem;
+    }
+
+    #view-detail-content .ql-indent-2 {
+        padding-left: 3rem;
+    }
+
+    #view-detail-content .ql-indent-3 {
+        padding-left: 4.5rem;
+    }
+
+    #view-detail-content .ql-indent-4 {
+        padding-left: 6rem;
+    }
+
+    #view-detail-hero-image {
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    #view-detail-hero-image.is-loaded {
+        opacity: 1;
+    }
+
+    #view-detail-hero-loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        z-index: -8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #080808;
+    }
+
+    #view-detail-hero-loader.hidden {
+        display: none;
+    }
+
+    #view-detail-hero-loader .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.25);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: view-detail-hero-spin 0.8s linear infinite;
+    }
+
+    @keyframes view-detail-hero-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<body class="min-h-screen page-gradient-dark-to-light">
+    <header class="fixed top-0 left-0 w-full z-50">
+        <div
+            class="absolute top-0 left-0 w-full h-[128px] z-10 bg-[linear-gradient(180deg,#080808_0%,rgba(8,8,8,0.5)_50%,rgba(8,8,8,0)_100%)]">
+        </div>
+        <div class="z-50 max-w-[1920px] mx-auto py-6 px-4 lg:px-20 flex items-center justify-between text-white">
+            <nav class="z-50 hidden md:flex gap-12 uppercase text-sm tracking-wide">
+                <a href="index.html" class="!text-white link-underline text-[19px]">Home</a>
+                <a href="about.html" class="!text-white link-underline text-[19px]">About Us</a>
+                <a href="services.html" class="!text-white link-underline text-[19px]">Services</a>
+                <button type="button" id="views-toggle"
+                    class="!text-white link-underline link-underline-active text-[19px] uppercase cursor-pointer bg-transparent border-none text-inherit font-inherit p-0">Views</button>
+            </nav>
+            <a class="z-50" href="index.html"><img src="./assets/svg/logo.svg" alt="CYCG"
+                    class="z-50 h-12 lg:h-16 lg:mr-20" /></a>
+            <div class="hidden lg:flex items-center gap-4 text-[#EBEBEB]">
+                <nav class="z-50">
+                    <a href="./contact.html "
+                        class="!text-white z-50 uppercase link-underline cursor-pointer text-[19px] text-[rgba(235, 235, 235, 1)]">Connect
+                        with us</a>
+                </nav>
+                <div class="z-50 flex items-center gap-3">
+                    <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                            src="./assets/svg/linkedin.svg" alt="linkedin" class="w-8 h-8 cursor-pointer"></a>
+                    <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                            src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                    <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                        <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                    </a>
+                </div>
+            </div>
+            <button id="mobile-menu-btn"
+                class="lg:hidden z-50 flex flex-col gap-1.5 w-8 h-8 justify-center items-center cursor-pointer"
+                aria-label="Toggle menu">
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+            </button>
+        </div>
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[100] bg-[#080808] transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="relative w-full h-full">
+                <button id="mobile-menu-close"
+                    class="absolute top-6 right-4 z-[101] w-8 h-8 flex items-center justify-center cursor-pointer"
+                    aria-label="Close menu">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+                <nav class="flex flex-col items-center justify-center h-full gap-8">
+                    <a href="index.html"
+                        class="!text-white !no-underline mobile-nav-link text-white uppercase text-2xl tracking-wide">Home</a>
+                    <a href="about.html"
+                        class="!text-white !no-underline mobile-nav-link text-white uppercase text-2xl tracking-wide">About
+                        Us</a>
+                    <a href="services.html"
+                        class="!text-white !no-underline mobile-nav-link text-white uppercase text-2xl tracking-wide">Services</a>
+                    <a href="views.html"
+                        class="!text-white !no-underline  mobile-nav-link text-white uppercase text-2xl tracking-wide">Views</a>
+                </nav>
+            </div>
+        </div>
+        <div id="views-dropdown" class="fixed top-0 left-0 w-full h-0 z-40">
+        </div>
+    </header>
+
+    <div class="relative min-h-[1080px]">
+        <div id="view-detail-hero-loader" aria-hidden="true">
+            <span class="loader-spinner"></span>
+        </div>
+        <img id="view-detail-hero-image" src="./assets/img/ab-about.png" alt=""
+            class="absolute top-0 left-0 right-0 h-screen -z-10 w-full h-full object-cover object-center" />
+        <div
+            class="absolute top-0 left-0 right-0 h-screen -z-[5] w-full bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,#000000_100%)] pointer-events-none">
+        </div>
+        <!-- <div
+            class="fixed bottom-4 right-4 z-[9999] rounded-full flex items-center justify-center bg-[#1E1E1E]/20 backdrop-blur-sm ">
+            <img src="./assets/svg/chat.svg" alt="chat icon" class="ml-2 mt-2 h-14 md:h-16">
+        </div> -->
+
+        <main id="views-source" class="hidden views-page-gradient" aria-hidden="true">
+            <div class="pt-6 pb-10">
+                <div class="max-w-[1320px] mx-auto mb-1">
+                    <div
+                        class="flex flex-col gap-8 md:gap-0 lg:flex-row lg:flex-nowrap lg:gap-0 xl:gap-0 items-start justify-between">
+                        <div class="px-4 md:px-0 w-full lg:flex-1 lg:max-w-[400px] xl:max-w-[420px] flex-shrink-0">
+                            <h1
+                                class="font-kiona font-normal uppercase text-[40px] sm:text-[50px] md:text-[80px] leading-[90%] tracking-normal text-[#EBEBEB] mb-3">
+                                Views</h1>
+                            <p class="text-[#EBEBEB] font-inter text-[16px] leading-relaxed">A curated collection of
+                                CYCG's perspectives, offering clear, actionable thinking on the forces shaping business
+                                today and tomorrow.</p>
+                        </div>
+                        <div
+                            class="px-4 md:px-0 flex flex-col gap-1.5 sm:gap-2 w-full lg:w-auto min-w-full md:min-w-[420px] lg:max-w-[820px] xl:max-w-[860px] flex-shrink-0">
+                            <a href="views.html"
+                                class="px-5 py-3 sm:px-6 sm:py-4 bg-[#111111] !text-white no-underline hover:bg-[#2E2E2E] border border-[#333333] rounded-full text-[#EBEBEB] text-[14px] sm:text-[16px] font-normal transition-colors whitespace-nowrap">All
+                                Topics</a>
+                            <div id="views-category-list" class="contents"></div>
+                        </div>
+                        <div
+                            class="px-4 md:px-0 w-full lg:w-auto lg:max-w-[320px] xl:max-w-[380px] flex-shrink-0 lg:text-right !text-white no-underlines">
+                            <h2
+                                class="font-kiona font-normal text-left lg:font-semibold uppercase text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] leading-[90%] tracking-normal text-[#EBEBEB] mb-2 lg:mb-3">
+                                Recent Views</h2>
+                            <div class="flex flex-col gap-2.5 sm:gap-3 lg:gap-3 xl:gap-4">
+                                <a href="view-detail.html"
+                                    class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                    <div
+                                        class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                        <img src="./assets/img/blog img.webp" alt="" class="w-full h-full object-cover"
+                                            loading="lazy">
+                                    </div>
+                                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                        <h3
+                                            class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                            Why every board needs a strategic partner: The power of...</h3>
+                                        <span
+                                            class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                            Jan 2026</span>
+                                    </div>
+                                </a>
+                                <a href="view-detail.html"
+                                    class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                    <div
+                                        class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                        <img src="./assets/img/blog img (1).webp" alt=""
+                                            class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                        <h3
+                                            class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                            Why every board needs a strategic partner: The power of...</h3>
+                                        <span
+                                            class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                            Jan 2026</span>
+                                    </div>
+                                </a>
+                                <a href="view-detail.html"
+                                    class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                    <div
+                                        class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                        <img src="./assets/img/blog img (2).webp" alt=""
+                                            class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                        <h3
+                                            class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                            Why every board needs a strategic partner: The power of...</h3>
+                                        <span
+                                            class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                            Jan 2026</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="views-close-btn"
+                    class="mx-auto mb-10 flex items-center justify-center w-7 h-7 rounded-full border border-[#333] text-[#EBEBEB] transition hover:bg-[#1a1a1a]"
+                    aria-label="Close Views menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                    </svg>
+                </button>
+            </div>
+        </main>
+        <main class="pt-[300px] sm:pt-[400px] md:pt-[400px] pb-[20px]">
+            <section class="w-full ">
+                <div class="w-full max-w-[1320px] mx-auto px-4 md:px-0 pt-10 2xl:pt-14">
+                    <div
+                        class=" bg-[#141414]/95 rounded-[24px] flex flex-col 2xl:grid 2xl:grid-cols-[minmax(0,1fr)_488px] gap-10 md:gap-[32px] text-[#EBEBEB] shadow-[0_40px_56px_0_#00000052] border border-[#1F1F1F]">
+                        <article
+                            class="order-1 2xl:order-none w-full 2xl:flex-1 2xl:min-w-0 2xl:min-h-[800px] px-4 py-6 md:pt-12 md:pb-20 md:pl-10 max-w-[800px]">
+
+                            <div class="flex items-center gap-2 text-xs md:text-sm text-[#EBEBEB] mb-7">
+                                <a href="./views.html"
+                                    class="!text-white no-underline inline-flex items-center gap-2 hover:underline-offset-8 tracking-wide text-[16px]">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 12H5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M12 19L5 12L12 5" stroke="white" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                    <span>Return to All Views</span>
+                                </a>
+                            </div>
+
+                            <p id="view-detail-date" class="text-xs md:text-sm text-[#EBEBEB]/60 mb-2">
+                                31st Jan 2026
+                            </p>
+
+                            <h1 id="view-detail-title"
+                                class="font-kiona font-normal leading-[90%] text-[24px] md:text-[40px] text-white mb-10">
+                                Why every board needs a strategic partner: The power of board level advisories
+                            </h1>
+
+                            <p id="view-detail-intro"
+                                class="max-w-[760px] text-[15px] md:text-[18px] leading-relaxed text-[#EBEBEB]/60 mb-10">
+                                Boards today need more than governance—they need vision. CYCG empowers directors with
+                                strategic guidance to lead confidently, manage risk, and drive impact in a complex
+                                world.
+                            </p>
+
+                            <div id="view-detail-content"
+                                class="prose prose-invert max-w-[760px] text-[15px] md:text-[18px] leading-[1.5] [&>ul]:mb-6 [&>ul]:space-y-3">
+                                <h2 class="text-[22px] md:text-[24px] text-white font-semibold">Introduction</h2>
+                                <p class="mb-5 text-[#EBEBEB]/60">
+                                    In today&apos;s rapidly evolving business ecosystem, governance alone is no longer
+                                    sufficient. Boards are under immense pressure to navigate uncertainty, address
+                                    disruptive market forces, and deliver long-term stakeholder value. To meet these
+                                    demands, boards require more than oversight—they need strategic partnership.
+                                </p>
+
+                                <h2 class="text-[22px] md:text-[24px] text-white font-semibold">The Shift from
+                                    Governance to
+                                    Vision</h2>
+                                <p class="mb-5 text-[#EBEBEB]/60">
+                                    Traditionally, the role of the board has been focused on fiduciary responsibilities,
+                                    compliance, and governance frameworks. While these remain foundational, the
+                                    challenges of the modern marketplace demand a broader, more visionary approach.
+                                    Boards must now serve as strategic stewards—proactively shaping the future, not just
+                                    preserving the present.
+                                </p>
+
+                                <p class="text-[15px] md:text-[18px] text-[#EBEBEB] mt-8 mb-4 italic">Enter: Board-Level
+                                    Advisories</p>
+                                <p class="mb-5 text-[#EBEBEB]/60">
+                                    Strategic board advisories are not consultants in the traditional sense—they are
+                                    embedded partners who provide high-level insight, foresight, and directional
+                                    clarity.
+                                    These advisors bring a mix of deep industry expertise, macroeconomic perspective,
+                                    and
+                                    real-world boardroom experience to inform critical decisions.
+                                </p>
+                                <p class="mb-5 text-[#EBEBEB]/60">
+                                    At CYCG, we recognise this shift and empower leadership with the tools, insights,
+                                    and
+                                    strategies needed to confidently chart their course forward.
+                                </p>
+
+                                <h2 class="text-[22px] md:text-[24px] text-white font-semibold">How CYCG Creates Impact
+                                    at the
+                                    Board Level</h2>
+                                <p class="mb-4 text-[#EBEBEB]/60">
+                                    CYCG doesn&apos;t just advise—we partner. Our board-level engagements are designed
+                                    to:
+                                </p>
+                                <ul class="list-disc list-outside pl-6 pr-0 space-y-3 [&>li]:pl-1 text-[#EBEBEB]/60">
+                                    <li>
+                                        <strong>Deliver Strategic Clarity:</strong> We help boards identify blind spots,
+                                        unlock growth opportunities, and align long-term goals with actionable roadmaps.
+                                    </li>
+                                    <li>
+                                        <strong>Navigate Complexity:</strong> From geopolitical risks to digital
+                                        disruption, we provide context-driven analysis to inform resilient
+                                        decision-making.
+                                    </li>
+                                    <li>
+                                        <strong>Strengthen Leadership Confidence:</strong> Through trusted counsel and
+                                        informed foresight, we reinforce boardroom agility and executive alignment.
+                                    </li>
+                                </ul>
+
+                                <h2 class="text-[22px] md:text-[24px] text-white mb-3">The Future Belongs to Boards That
+                                    Think Forward</h2>
+                                <p class="mb-5 text-[#EBEBEB]/60">
+                                    In an environment where ambiguity is the only constant, the boards that thrive are
+                                    those who embrace change, invite outside perspective, and build strategic
+                                    partnerships
+                                    that unlock foresight and fuel innovation.
+                                </p>
+
+                                <h2 class="text-[22px] md:text-[24px] text-white font-semibold">Conclusion</h2>
+                                <p class="mb-0 text-[#EBEBEB]/60">
+                                    It&apos;s no longer enough for boards to govern—they must lead. With CYCG as a
+                                    strategic partner at the table, boards can transcend conventional roles, mitigate
+                                    risk
+                                    with intelligence, and drive transformative impact in a complex world.
+                                </p>
+                            </div>
+                        </article>
+
+                        <aside
+                            class="order-3 2xl:order-none w-full max-w-[488px] 2xl:max-w-none text-[#EBEBEB] px-4 pb-4 md:px-10 md:pt-[9rem]">
+                            <h2
+                                class="font-kiona font-normal uppercase text-[32px] sm:text-[40px] md:text-[40px] leading-[90%] tracking-normal text-white mb-12">
+                                <span>Recent</span> <span class="relative z-10 fx-word-2">Views</span>
+                            </h2>
+
+                            <div id="detail-recent-views-list" class="flex flex-col gap-5 sm:gap-6 w-full min-w-0">
+                                <a href="#"
+                                    class="flex gap-3 w-full bg-[#242424] !text-white !no-underline rounded-[16px] overflow-hidden p-3 hover:bg-[#2E2E2E] transition-colors ">
+                                    <div
+                                        class="w-[80px] h-[60px] sm:w-[96px] sm:h-[72px] rounded-[12px] overflow-hidden flex-shrink-0">
+                                        <img src="./assets/img/blog img (1).webp" alt=""
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex flex-col justify-between">
+                                        <p
+                                            class="text-[14px] text-white leading-snug line-clamp-2 !text-white !no-underline">
+                                            Why every board needs a strategic partner: The power of board level
+                                            advisories
+                                        </p>
+                                        <span class="text-[12px] text-[#EBEBEB]/70 mt-1 !text-white !no-underline">31st
+                                            Jan 2026</span>
+                                    </div>
+                                </a>
+
+                                <a href="#"
+                                    class="flex gap-3 w-full bg-[#242424] rounded-[16px] overflow-hidden p-3 hover:bg-[#2E2E2E] transition-colors">
+                                    <div
+                                        class="w-[80px] h-[60px] sm:w-[96px] sm:h-[72px] rounded-[12px] overflow-hidden flex-shrink-0">
+                                        <img src="./assets/img/blog img (2).webp" alt=""
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex flex-col justify-between">
+                                        <p class="text-[14px] text-white leading-snug line-clamp-2">
+                                            Building future-ready workforces for evolving business models
+                                        </p>
+                                        <span class="text-[12px] text-[#EBEBEB]/70 mt-1">24th Jan 2026</span>
+                                    </div>
+                                </a>
+
+                                <a href="#"
+                                    class="flex gap-3 w-full bg-[#242424] rounded-[16px] overflow-hidden p-3 hover:bg-[#2E2E2E] transition-colors">
+                                    <div
+                                        class="w-[80px] h-[60px] sm:w-[96px] sm:h-[72px] rounded-[12px] overflow-hidden flex-shrink-0">
+                                        <img src="./assets/img/blog img (3).webp" alt=""
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex flex-col justify-between">
+                                        <p class="text-[14px] text-white leading-snug line-clamp-2">
+                                            Navigating disruption with data-led workforce strategies
+                                        </p>
+                                        <span class="text-[12px] text-[#EBEBEB]/70 mt-1">18th Jan 2026</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </aside>
+
+                        <div id="view-detail-whitepaper-cta"
+                            class="hidden order-2 2xl:order-none w-full 2xl:col-span-2 px-4 md:px-10 pb-6 md:pb-10">
+                            <div
+                                class="w-full rounded-[16px] md:rounded-[20px]  p-6 md:p-10 flex flex-col items-center justify-center text-center gap-9">
+                                <h3 id="view-detail-whitepaper-title"
+                                    class="font-kiona font-normal uppercase text-[30px] sm:text-[38px] md:text-[48px] leading-[90%] text-[#EBEBEB]">
+                                    GET ACCESS TO THE WHITE PAPER
+                                </h3>
+                                <button id="view-detail-whitepaper-link"
+                                    class="inline-flex items-center justify-center !bg-[#E8E8E8] text-[#3A3A3A] !no-underline hover:bg-white transition-colors px-6 md:px-8 py-4 md:py-4 text-[17px] md:text-[20px] font-semibold uppercase leading-[100%]">
+                                    DOWNLOAD WHITE PAPER
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="w-full flex justify-center px-0 mt-16 sm:mt-20 lg:mt-24 xl:mt-32">
+                        <div
+                            class="w-full mx-auto xl:h-[397px] h-auto rounded-[20px] sm:rounded-[24px] overflow-hidden flex flex-col xl:flex-row shadow-[0_40px_56px_0_#00000052,-24px_-20px_64px_0_#FFFFFF1A]">
+
+                            <div
+                                class="w-full xl:w-[60%] h-full flex flex-col max-h-[230px] border-white/40  md:max-h-full items-start justify-end md:justify-center bg-[#ffffff] px-4 py-4  md:px-12 md:py-8 text-left">
+                                <div
+                                    class="font-kiona !font-[400] text-[20px] sm:text-[24px] md:text-[28px] xl:text-[40px] leading-[110%] tracking-[0] uppercase text-[#2E2E2E] align-middle mb-3 sm:mb-4">
+                                    <b> Schedule a consultation today</b>
+                                </div>
+                                <p
+                                    class="text-[13px] sm:text-[16px] md:text-[18px] xl:text-[24px] font-[500] leading-relaxed text-[#2E2E2E] mb-6 sm:mb-8 max-w-[620px]">
+                                    Where enterprise expertise, results-driven solutions, and future-ready strategies
+                                    converge
+                                    for your success.
+                                </p>
+                                <div class="flex items-center justify-start">
+                                    <button
+                                        class="flex items-center justify-center px-8 py-4 bg-[#2E2E2E] hover:bg-[#333] hover:scale-[1.02] active:scale-[0.98] text-white text-sm xl:text-[24px] font-[600] whitespace-nowrap mx-auto xl:mx-0 transition-all duration-200 ease-out">
+                                        SCHEDULE CALL NOW
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relative w-full xl:w-1/2 h-[273px] md:h-[240px] xl:h-full">
+                                <img src="./assets/img/laptop.webp" alt="Laptop"
+                                    class="absolute inset-0 w-full h-full hidden md:block object-cover">
+                                <img src="./assets/img/mobile-view.png" alt="Laptop"
+                                    class="absolute inset-0 w-full h-full md:hidden object-cover -mt-1">
+                                <div
+                                    class="md:block hidden absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)] xl:bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_25%)]">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+            </section>
+        </main>
+
+        <footer class="py-0 md:pb-12 px-6">
+            <div class="max-w-[1320px] mx-auto px-0 md:px-0 text-center text-white">
+                <div class=" flex flex-col md:flex-row rounded-[24px] border-2 border-[#2E2E2E]">
+                    <div
+                        class="flex flex-col gap-4 p-4 py-8 border-r  border-[#2E2E2E] border-b-2  md:border-b-[0px]  tracking-wide w-full md:w-1/4 flex justify-center items-center">
+                        <img src="./assets/svg/logo.svg" alt="company logo">
+                        <div class="flex items-center justify-center">
+                            <p class="text-sm mr-4 text-inter font-[400]">subsidiary of</p>
+                            <img src="./assets/img/fyghtclub.webp" class="h-10" alt="fyght-club-logo">
+                        </div>
+                    </div>
+                    <div class="flex w-full md:w-3/4 flex-col  text-[#EBEBEB]">
+                        <div
+                            class="py-4 md:py-8 border-b-2 border-[#2E2E2E]   text-xs md:text-lg text-[rgba(235, 235, 235, 1)]  flex text-center justify-center gap-3 md:gap-7">
+                            <a href="index.html"
+                                class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Home</a>
+                            <a href="about.html"
+                                class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">About Us</a>
+                            <a href="services.html"
+                                class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Services</a>
+                            <a href="views.html"
+                                class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Views</a>
+                            <a href="privacy.html"
+                                class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Privacy
+                                Policy</a>
+                        </div>
+                        <div class="my-3 md:py-8  flex items-center gap-4 text-[#EBEBEB] justify-center z-0 ">
+
+                            <span
+                                class="uppercase  text-sm md:text-lg text-[rgba(235, 235, 235, 1)] no-underline !text-white">
+                                Connect with us
+                            </span>
+
+                            <div class="flex items-center gap-3">
+                                <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                                        src="./assets/svg/linkedin.svg" alt="linkedin"
+                                        class="w-8 h-8 cursor-pointer"></a>
+                                <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                                        src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                                <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                                    <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-sm text-white mt-4 pb-6 md:pb-0">© 2025 CYCG | All Right Reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const hamburgerSpans = mobileMenuBtn.querySelectorAll('span');
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+            hamburgerSpans[0].style.transform = 'rotate(45deg) translateY(8px)';
+            hamburgerSpans[1].style.opacity = '0';
+            hamburgerSpans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+            hamburgerSpans[0].style.transform = '';
+            hamburgerSpans[1].style.opacity = '';
+            hamburgerSpans[2].style.transform = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu || e.target.closest('.mobile-nav-link')) {
+                if (e.target === mobileMenu) {
+                    closeMenu();
+                }
+            }
+        });
+
+        const blogApiBase = 'https://cycgbackendapi.chaitanyarana.com/api/blogs';
+        const fallbackImage = './assets/img/blog img.webp';
+
+        const detailDateEl = document.getElementById('view-detail-date');
+        const detailTitleEl = document.getElementById('view-detail-title');
+        const detailIntroEl = document.getElementById('view-detail-intro');
+        const detailContentEl = document.getElementById('view-detail-content');
+        const detailHeroImageEl = document.getElementById('view-detail-hero-image');
+        const detailHeroLoaderEl = document.getElementById('view-detail-hero-loader');
+        const recentViewsListEl = document.getElementById('detail-recent-views-list');
+        const whitePaperCtaEl = document.getElementById('view-detail-whitepaper-cta');
+        const whitePaperTitleEl = document.getElementById('view-detail-whitepaper-title');
+        const whitePaperLinkEl = document.getElementById('view-detail-whitepaper-link');
+        const backToViewsLink = document.querySelector('a[href="./views.html"]');
+        const whitePaperConfigById = {
+            default: {
+                title: 'GET ACCESS TO THE WHITE PAPER',
+                buttonText: 'DOWNLOAD WHITE PAPER',
+                href: '#'
+            }
+        };
+
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return '';
+            const escaped = document.createElement('div');
+            escaped.innerText = text;
+            return escaped.innerHTML;
+        }
+
+        function toSlug(value) {
+            return String(value || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function getOrdinalSuffix(day) {
+            if (day > 3 && day < 21) return 'th';
+            switch (day % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        function formatDisplayDate(isoDate) {
+            const date = new Date(isoDate);
+            if (Number.isNaN(date.getTime())) return '';
+            const day = date.getDate();
+            const month = date.toLocaleString('en-US', { month: 'short' });
+            const year = date.getFullYear();
+            return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
+        }
+
+        function extractTextFromHtml(value) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = String(value || '');
+            return (wrapper.textContent || '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function sanitizeHtmlContent(value) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = String(value || '');
+
+            wrapper.querySelectorAll('script, style, iframe, object, embed, link, meta').forEach((node) => {
+                node.remove();
+            });
+
+            wrapper.querySelectorAll('*').forEach((element) => {
+                Array.from(element.attributes).forEach((attribute) => {
+                    const name = attribute.name.toLowerCase();
+                    const rawValue = String(attribute.value || '').trim();
+                    const value = rawValue.toLowerCase();
+                    const isDangerousLink = (name === 'href' || name === 'src') && value.startsWith('javascript:');
+                    if (name.startsWith('on') || isDangerousLink) {
+                        element.removeAttribute(attribute.name);
+                    }
+                });
+            });
+
+            return wrapper.innerHTML;
+        }
+
+        function setDetailHeroImage(src, altText) {
+            if (!detailHeroImageEl) return;
+
+            detailHeroImageEl.classList.remove('is-loaded');
+            if (detailHeroLoaderEl) detailHeroLoaderEl.classList.remove('hidden');
+
+            const onHeroImageReady = () => {
+                detailHeroImageEl.classList.add('is-loaded');
+                if (detailHeroLoaderEl) detailHeroLoaderEl.classList.add('hidden');
+            };
+
+            detailHeroImageEl.onload = onHeroImageReady;
+            detailHeroImageEl.onerror = onHeroImageReady;
+            detailHeroImageEl.alt = altText;
+            detailHeroImageEl.src = src;
+
+            if (detailHeroImageEl.complete) {
+                onHeroImageReady();
+            }
+        }
+
+        function getValidatedBlogIdOrRedirect() {
+            const params = new URLSearchParams(window.location.search);
+            const rawId = params.get('id');
+            const id = Number(rawId);
+            if (!rawId || !Number.isInteger(id) || id <= 0) {
+                window.location.replace('/');
+                return null;
+            }
+            return id;
+        }
+
+        function renderRecentViews(blogs) {
+            if (!recentViewsListEl) return;
+            if (!Array.isArray(blogs) || !blogs.length) {
+                recentViewsListEl.innerHTML = '';
+                return;
+            }
+
+            recentViewsListEl.innerHTML = blogs.slice(0, 3).map((blog) => {
+                const id = blog?.id != null ? String(blog.id) : '';
+                const title = escapeHtml(String(blog?.title || 'Untitled'));
+                const image = escapeHtml(String(blog?.image || fallbackImage));
+                const dateValue = blog?.createdAt || blog?.updatedAt;
+                const date = escapeHtml(formatDisplayDate(dateValue) || 'Date unavailable');
+                const href = `view-detail.html?id=${encodeURIComponent(id)}`;
+
+                return `
+                    <a href="${href}" style="text-decoration: none;" class="flex gap-3 w-full bg-[#242424] !text-white !no-underlines rounded-[16px] overflow-hidden p-3 hover:bg-[#2E2E2E] transition-colors">
+                        <div class="w-[80px] h-[60px] sm:w-[96px] sm:h-[72px] rounded-[12px] overflow-hidden flex-shrink-0">
+                            <img src="${image}" alt="${title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <p class="text-[14px] text-white leading-snug line-clamp-2 !text-white !no-underline">${title}</p>
+                            <span class="text-[12px] text-[#EBEBEB]/70 mt-1 !text-white !no-underline">${date}</span>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderWhitePaperCta(blog) {
+            if (!whitePaperCtaEl || !whitePaperTitleEl || !whitePaperLinkEl) return;
+
+            const blogId = Number(blog?.id);
+            const config = whitePaperConfigById[blogId] || whitePaperConfigById.default;
+            const href = String(config?.href || '').trim();
+
+            if (!href) {
+                whitePaperCtaEl.classList.add('hidden');
+                return;
+            }
+
+            whitePaperTitleEl.textContent = config?.title || 'GET ACCESS TO THE WHITE PAPER';
+            whitePaperLinkEl.textContent = config?.buttonText || 'DOWNLOAD WHITE PAPER';
+            whitePaperLinkEl.href = href;
+            whitePaperLinkEl.target = '_blank';
+            whitePaperLinkEl.rel = 'noopener noreferrer';
+            whitePaperCtaEl.classList.remove('hidden');
+        }
+
+        async function loadViewDetail() {
+            const blogId = getValidatedBlogIdOrRedirect();
+            if (!blogId) return;
+
+            try {
+                const detailResponse = await fetch(`${blogApiBase}/${blogId}`);
+                if (!detailResponse.ok) {
+                    window.location.replace('/');
+                    return;
+                }
+
+                const detailResult = await detailResponse.json();
+                const blog = detailResult?.data && !Array.isArray(detailResult.data)
+                    ? detailResult.data
+                    : detailResult;
+
+                if (!blog || typeof blog !== 'object' || Number(blog?.id) !== blogId) {
+                    window.location.replace('/');
+                    return;
+                }
+
+                const title = String(blog?.title || 'Untitled');
+                const publishedDate = formatDisplayDate(blog?.createdAt || blog?.updatedAt) || 'Date unavailable';
+                const safeContentHtml = sanitizeHtmlContent(blog?.content || '');
+                const introText = extractTextFromHtml(blog?.content || '');
+                const introPreview = introText.length > 240 ? `${introText.slice(0, 240).trim()}...` : introText;
+                const detailImage = String(blog?.image || fallbackImage);
+
+                if (detailTitleEl) detailTitleEl.textContent = title;
+                if (detailDateEl) detailDateEl.textContent = publishedDate;
+                if (detailIntroEl) detailIntroEl.textContent = introPreview || 'No summary available.';
+                if (detailContentEl) detailContentEl.innerHTML = safeContentHtml || '<p class="text-[#EBEBEB]/60">No content available.</p>';
+                if (detailHeroImageEl) {
+                    setDetailHeroImage(detailImage, title);
+                }
+                renderWhitePaperCta(blog);
+                document.title = `${title} | CYCG`;
+
+                const categoryName = blog?.category?.name || '';
+                const categoryId = blog?.category?.id;
+                if (backToViewsLink && categoryId != null && categoryName) {
+                    const categoryParam = `${toSlug(categoryName)}-${categoryId}`;
+                    backToViewsLink.href = `./views.html?category=${encodeURIComponent(categoryParam)}`;
+                }
+
+                let recentResponse = null;
+                if (categoryId != null && categoryName) {
+                    const categoryParam = `${toSlug(categoryName)}-${categoryId}`;
+                    recentResponse = await fetch(`${blogApiBase}?category=${encodeURIComponent(categoryParam)}`);
+                }
+
+                if (!recentResponse || !recentResponse.ok) {
+                    recentResponse = await fetch(blogApiBase);
+                }
+
+                if (recentResponse.ok) {
+                    const recentResult = await recentResponse.json();
+                    const recentBlogs = Array.isArray(recentResult)
+                        ? recentResult
+                        : Array.isArray(recentResult?.data)
+                            ? recentResult.data
+                            : [];
+                    const filteredRecent = recentBlogs.filter((item) => Number(item?.id) !== blogId);
+                    renderRecentViews(filteredRecent);
+                }
+            } catch (error) {
+                window.location.replace('/');
+            }
+        }
+
+        loadViewDetail();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

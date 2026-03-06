@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Views | Workforce Development | CYCG</title>
+    <link href="./output.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="./assets/svg/logo.svg" />
+    <style>
+        @media (max-width: 930px) {
+            .views-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 931px) and (max-width: 1319px) {
+            .views-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1320px) {
+            .views-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .blog-card-wrapper {
+            position: relative;
+            padding: 2px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #242424 100%);
+            border-radius: 20px;
+            display: flex;
+        }
+
+        @media (min-width: 640px) {
+            .blog-card-wrapper {
+                border-radius: 24px;
+            }
+        }
+
+        .blog-card-border {
+            width: 100%;
+            background: #242424;
+            border-radius: inherit;
+            box-shadow:
+                inset 0 -8px 8px 0 rgba(0, 0, 0, 0.32),
+                0 0 16px 0 rgba(0, 0, 0, 0.32);
+        }
+
+        #views-dropdown {
+            transition: height 600ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: height;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen views-page-gradient">
+
+    <header class="fixed top-0 left-0 w-full z-50">
+        <div
+            class="absolute top-0 left-0 w-full h-[128px] z-10 bg-[linear-gradient(180deg,#080808_0%,rgba(8,8,8,0.5)_50%,rgba(8,8,8,0)_100%)]">
+        </div>
+        <div class="z-50 max-w-[1920px] mx-auto py-6 px-4 lg:px-20 flex items-center justify-between text-white">
+            <nav class="z-50 hidden md:flex gap-12 uppercase text-sm tracking-wide">
+                <a href="index.html" class="!text-white link-underline text-[19px]">Home</a>
+                <a href="about.html" class="!text-white link-underline text-[19px]">About Us</a>
+                <a href="services.html" class="!text-white link-underline text-[19px]">Services</a>
+                <button type="button" id="views-toggle"
+                    class="!text-white link-underline text-[19px] uppercase cursor-pointer bg-transparent border-none text-inherit font-inherit p-0">Views</button>
+            </nav>
+            <a class="z-50" href="index.html"><img src="./assets/svg/logo.svg" alt="CYCG"
+                    class="z-50 h-12 lg:h-16 lg:mr-20" /></a>
+            <div class="hidden lg:flex items-center gap-4 text-[#EBEBEB]">
+                <nav class="z-50">
+                    <a href="./contact.html "
+                        class="z-50 !text-white uppercase link-underline cursor-pointer text-[19px] text-[rgba(235, 235, 235, 1)]">Connect
+                        with us</a>
+                </nav>
+                <div class="z-50 flex items-center gap-3">
+                    <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                            src="./assets/svg/linkedin.svg" alt="linkedin" class="w-8 h-8 cursor-pointer"></a>
+                    <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                            src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                    <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                        <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                    </a>
+                </div>
+            </div>
+            <button id="mobile-menu-btn"
+                class="lg:hidden z-50 flex flex-col gap-1.5 w-8 h-8 justify-center items-center cursor-pointer"
+                aria-label="Toggle menu">
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+            </button>
+        </div>
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[100] bg-[#080808] transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="relative w-full h-full">
+                <button id="mobile-menu-close"
+                    class="absolute top-6 right-4 z-[101] w-8 h-8 flex items-center justify-center cursor-pointer"
+                    aria-label="Close menu">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+                <nav class="flex flex-col items-center justify-center h-full gap-8">
+                    <a href="index.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide">Home</a>
+                    <a href="about.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide">About
+                        Us</a>
+                    <a href="services.html"
+                        class="mobile-nav-link text-white uppercase text-2xl tracking-wide">Services</a>
+                    <a href="views.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide ">Views</a>
+                </nav>
+            </div>
+        </div>
+        <div id="views-dropdown" class="fixed top-0 left-0 w-full h-0 z-40">
+        </div>
+    </header>
+    <!-- <div class="fixed bottom-4 right-4  rounded-full flex items-center justify-center  bg-[#080808]">
+        <img src="./assets/svg/chat.svg" alt="chat icon" class="ml-2 mt-2 h-14 md:h-16">
+    </div> -->
+    <main id="views-source" class="hidden views-page-gradient  z-[9999]" aria-hidden="true">
+        <div class="pt-6 pb-10">
+            <div class="max-w-[1320px] mx-auto mb-1">
+                <div
+                    class="flex flex-col gap-8 md:gap-0 lg:flex-row lg:flex-nowrap lg:gap-0 xl:gap-0 items-start justify-between">
+                    <div class="px-4 md:px-0 w-full lg:flex-1 lg:max-w-[400px] xl:max-w-[420px] flex-shrink-0">
+                        <h1
+                            class="font-kiona font-normal uppercase text-[40px] sm:text-[50px] md:text-[80px] leading-[90%] tracking-normal text-[#EBEBEB] mb-3">
+                            Views</h1>
+                        <p class="text-[#EBEBEB] font-inter text-[16px] leading-relaxed">A curated collection of CYCG's
+                            perspectives, offering clear, actionable thinking on the forces shaping business today and
+                            tomorrow.</p>
+                    </div>
+                    <div
+                        class="px-4 md:px-0 flex flex-col gap-1.5 sm:gap-2 w-full lg:w-auto min-w-full md:min-w-[420px] lg:max-w-[820px] xl:max-w-[860px] flex-shrink-0">
+                        <a href="views.html"
+                            class="px-5 py-3 sm:px-6 sm:py-4 bg-[#111111] hover:bg-[#2E2E2E] border border-[#333333] rounded-full text-[#EBEBEB] text-[14px] sm:text-[16px] font-normal transition-colors whitespace-nowrap !text-white no-underline">All
+                            Topics</a>
+                        <div id="views-category-list" class="contents"></div>
+                    </div>
+                    <div
+                        class="px-4 md:px-0 w-full lg:w-auto lg:max-w-[320px] xl:max-w-[380px] flex-shrink-0 lg:text-right">
+                        <h2
+                            class="font-kiona font-normal text-left lg:font-semibold uppercase text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] leading-[90%] tracking-normal text-[#EBEBEB] mb-2 lg:mb-3">
+                            Recent Views</h2>
+                        <div id="recent-views-list" class="flex flex-col gap-2.5 sm:gap-3 lg:gap-3 xl:gap-4">
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img.webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img (1).webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img (2).webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="views-close-btn"
+                class="mx-auto mb-10 flex items-center justify-center w-7 h-7 rounded-full border border-[#333] text-[#EBEBEB] transition hover:bg-[#1a1a1a]"
+                aria-label="Close Views menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="1.75">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                </svg>
+            </button>
+        </div>
+    </main>
+    <main
+        class=" z-[9999] min-h-screen views-page-gradient pt-[120px] pb-[18px] px-4 sm:px-6 lg:px-8 xl:px-12 md:pt-[160px] md:pb-[80px]">
+        <div class="max-w-[1320px] mx-auto w-full">
+            <h2 id="views-category-heading"
+                class="font-kiona font-normal uppercase text-[32px] sm:text-[40px] md:text-[40px] leading-[90%] tracking-normal text-white mb-8 sm:mb-10 lg:mb-12">
+                <span class="relative z-10 fx-word-2">Workforce</span> <span class="pl-20px">Development</span>
+            </h2>
+            <div id="views-blog-grid"
+                class="grid gap-4 sm:gap-5 lg:gap-6 mb-16 sm:mb-20 lg:mb-24 justify-items-center xl:justify-items-stretch views-grid">
+            </div>
+            <!-- <div id="load-more-wrapper" class="flex justify-center mt-8 sm:mt-12">
+                <button type="button"
+                    class="w-full max-w-[206px] h-[54px] sm:h-[61px] bg-[#EBEBEB] text-[#2E2E2E] hover:bg-[#d9d9d9] uppercase text-[18px] sm:text-[20px] lg:text-[24px] font-medium tracking-wide transition-colors">
+                    LOAD MORE
+                </button>
+            </div> -->
+            <!-- <div class="w-full flex justify-center px-0 mt-16 sm:mt-20 lg:mt-24 xl:mt-32">
+                <div
+                    class="w-full mx-auto xl:h-[397px] h-auto rounded-[20px] sm:rounded-[24px] overflow-hidden flex flex-col xl:flex-row shadow-[0_40px_56px_0_#00000052,-24px_-20px_64px_0_#FFFFFF1A]">
+
+                    <div
+                        class="w-full xl:w-[60%] h-full flex flex-col max-h-[260px] md:max-h-full items-start md:justify-center justify-end bg-[#ffffff] px-6 py-8  md:px-12 md:py-8 text-left">
+                        <div
+                            class="font-kiona !font-[400] text-[20px] sm:text-[24px] md:text-[28px] xl:text-[40px] leading-[110%] tracking-[0] uppercase text-[#2E2E2E] align-middle mb-3 sm:mb-4">
+                            <b> Schedule a consultation today</b>
+                        </div>
+                        <p
+                            class="text-[13px] sm:text-[16px] md:text-[18px] xl:text-[24px] font-[500] leading-relaxed text-[#2E2E2E] mb-6 sm:mb-8 max-w-[620px]">
+                            Where enterprise expertise, results-driven solutions, and future-ready strategies converge
+                            for your success.
+                        </p>
+                        <div class="flex items-center justify-start">
+                            <button
+                                class="flex items-center justify-center px-8 py-4 bg-[#2E2E2E] hover:bg-[#333] hover:scale-[1.02] active:scale-[0.98] text-white text-sm xl:text-[24px] font-[600] whitespace-nowrap mx-auto xl:mx-0 transition-all duration-200 ease-out">
+                                SCHEDULE CALL NOW
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative w-full xl:w-1/2 h-[273px] md:h-[240px] xl:h-full">
+                        <img src="./assets/img/laptop.webp" alt="Laptop"
+                            class="absolute inset-0 w-full h-full hidden md:block object-cover">
+                        <img src="./assets/img/mobile-view.png" alt="Laptop"
+                            class="absolute inset-0 w-full h-full md:hidden object-cover">
+                        <div
+                            class="md:block hidden absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)] xl:bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_25%)]">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </main>
+    <footer class="py-0 md:pb-12   px-6">
+        <div class="max-w-[1320px] mx-auto px-0 md:px-0 text-center text-white">
+            <div class=" flex flex-col md:flex-row rounded-[24px] border-2 border-[#2E2E2E]">
+                <div
+                    class="flex flex-col gap-4 p-4 py-8 border-r  border-[#2E2E2E] border-b-2  md:border-b-[0px]  tracking-wide w-full md:w-1/4 flex justify-center items-center">
+                    <img src="./assets/svg/logo.svg" alt="company logo">
+                    <div class="flex items-center justify-center">
+                        <p class="text-sm mr-4 text-inter font-[400]">subsidiary of</p>
+                        <img src="./assets/img/fyghtclub.webp" class="h-10" alt="fyght-club-logo">
+                    </div>
+                </div>
+                <div class="flex w-full md:w-3/4 flex-col  text-[#EBEBEB]">
+                    <div
+                        class="py-4 md:py-8 border-b-2 border-[#2E2E2E]   text-xs md:text-lg text-[rgba(235, 235, 235, 1)]  flex text-center justify-center gap-3 md:gap-7">
+                        <a href="index.html" class="text-[#EBEBEB] cursor-pointer hover:text-white no-underline !text-white">Home</a>
+                        <a href="about.html" class="text-[#EBEBEB] cursor-pointer hover:text-white no-underline !text-white">About Us</a>
+                        <a href="services.html" class="text-[#EBEBEB] cursor-pointer hover:text-white no-underline !text-white">Services</a>
+                        <a href="views.html" class="text-[#EBEBEB] cursor-pointer hover:text-white no-underline !text-white">Views</a>
+                        <a href="privacy.html" class="text-[#EBEBEB] cursor-pointer hover:text-white no-underline !text-white">Privacy Policy</a>
+                    </div>
+                    <div class="my-3 md:py-8  flex items-center gap-4 text-[#EBEBEB] justify-center ">
+
+                        <a href="./contact.html"
+                            class="uppercase  text-sm md:text-lg text-[rgba(235, 235, 235, 1)] no-underline !text-white">
+                            Connect with us
+                        </a>
+
+                        <div class="flex items-center gap-3">
+                            <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                                    src="./assets/svg/linkedin.svg" alt="linkedin" class="w-8 h-8 cursor-pointer"></a>
+                            <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                                    src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                            <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                                <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm text-white mt-4 pb-6 md:pb-0">© 2025 CYCG | All Right Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const hamburgerSpans = mobileMenuBtn.querySelectorAll('span');
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+            hamburgerSpans[0].style.transform = 'rotate(45deg) translateY(8px)';
+            hamburgerSpans[1].style.opacity = '0';
+            hamburgerSpans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+            hamburgerSpans[0].style.transform = '';
+            hamburgerSpans[1].style.opacity = '';
+            hamburgerSpans[2].style.transform = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu || e.target.closest('.mobile-nav-link')) {
+                if (e.target === mobileMenu) {
+                    closeMenu();
+                }
+            }
+        });
+
+        const categoriesApiUrl = 'https://cycgbackendapi.chaitanyarana.com/api/categories';
+        const blogsApiBase = 'https://cycgbackendapi.chaitanyarana.com/api/blogs';
+        const categoryButtonClass = 'px-5 py-3 sm:px-6 sm:py-4 bg-[#111111] hover:bg-[#2E2E2E] border border-[#333333] rounded-full text-[#EBEBEB] text-[14px] sm:text-[16px] font-normal transition-colors whitespace-nowrap';
+        const cardImageFallback = './assets/img/blog/blog img.png';
+
+        const viewsCategoryList = document.getElementById('views-category-list');
+        const recentViewsList = document.getElementById('recent-views-list');
+        const viewsBlogGrid = document.getElementById('views-blog-grid');
+        const viewsCategoryHeading = document.getElementById('views-category-heading');
+        const loadMoreWrapper = document.getElementById('load-more-wrapper');
+
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return '';
+            const escaped = document.createElement('div');
+            escaped.innerText = text;
+            return escaped.innerHTML;
+        }
+
+        function toSlug(value) {
+            return String(value || '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
+        function extractTextFromHtml(value) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = String(value || '');
+            return (wrapper.textContent || '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function getOrdinalSuffix(day) {
+            if (day > 3 && day < 21) return 'th';
+            switch (day % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        function formatDisplayDate(isoDate) {
+            const date = new Date(isoDate);
+            if (Number.isNaN(date.getTime())) return '';
+            const day = date.getDate();
+            const month = date.toLocaleString('en-US', { month: 'short' });
+            const year = date.getFullYear();
+            return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
+        }
+
+        function formatCategoryTitle(name) {
+            return String(name || '')
+                .toLowerCase()
+                .split(' ')
+                .filter(Boolean)
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        }
+
+        function getValidCategoryParamOrRedirect() {
+            const params = new URLSearchParams(window.location.search);
+            const rawCategory = params.get('category');
+            const match = String(rawCategory || '').match(/^([a-z0-9-]+)-(\d+)$/i);
+
+            if (!match) {
+                window.location.replace('/');
+                return null;
+            }
+
+            return {
+                slug: match[1].toLowerCase(),
+                id: Number(match[2]),
+                raw: rawCategory
+            };
+        }
+
+        function renderViewsCategories(categories) {
+            if (!viewsCategoryList) return;
+
+            const validCategories = Array.isArray(categories) ? categories.slice(0, 6) : [];
+            if (!validCategories.length) return;
+
+            const allTopicsLink = `<a href="views.html" class="${categoryButtonClass}">All Topics</a>`;
+            const categoryLinks = validCategories.map((category) => {
+                const rawCategoryName = String(category?.name || 'Untitled');
+                const categoryName = escapeHtml(rawCategoryName);
+                const categorySlug = toSlug(rawCategoryName) || 'untitled';
+                const categoryId = category?.id != null ? String(category.id) : '';
+                const href = `views.html?category=${encodeURIComponent(categorySlug)}-${encodeURIComponent(categoryId)}`;
+                return `<a href="${href}" class="${categoryButtonClass}">${categoryName}</a>`;
+            }).join('');
+
+            viewsCategoryList.innerHTML = categoryLinks;
+        }
+
+        function buildBlogCard(blog) {
+            const blogId = blog?.id != null ? String(blog.id) : '';
+            const title = escapeHtml(String(blog?.title || 'Untitled'));
+            const descriptionText = extractTextFromHtml(blog?.content || '');
+            const description = escapeHtml(descriptionText || 'No description available.');
+            const image = escapeHtml(String(blog?.image || cardImageFallback));
+            const dateValue = blog?.createdAt || blog?.updatedAt;
+            const date = escapeHtml(formatDisplayDate(dateValue) || 'Date unavailable');
+            const detailUrl = `view-detail.html?id=${encodeURIComponent(blogId)}`;
+
+            return `
+                <div class="blog-card-wrapper w-full max-w-[424px] xl:w-[424px]">
+                    <article class="blog-card-border w-full h-auto min-h-[500px] sm:min-h-[550px] lg:min-h-[600px] xl:h-[631px] rounded-[20px] sm:rounded-[24px] overflow-hidden flex flex-col p-4 sm:p-5 lg:p-6">
+                        <div class="rounded-[12px] sm:rounded-[16px] overflow-hidden flex-shrink-0 w-full h-[200px] sm:h-[250px] md:h-[280px] lg:h-[303px] mb-3 sm:mb-4">
+                            <img src="${image}" alt="${title}" class="block w-full h-full object-cover rounded-[12px] sm:rounded-[16px]" loading="lazy">
+                        </div>
+                        <div class="flex flex-col flex-1 min-w-0">
+                            <h3 class="text-white font-medium text-[18px] sm:text-[20px] lg:text-[24px] mb-2 sm:mb-3">${title}</h3>
+                            <p class="text-[#EBEBEB] text-[14px] sm:text-[16px] lg:text-[18px] font-normal leading-relaxed mb-3 sm:mb-4 line-clamp-2">${description}</p>
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 mt-auto pt-1">
+                                <span class="text-[#EBEBEB] text-[14px] sm:text-[16px] lg:text-[18px] font-normal">${date}</span>
+                                <a href="${detailUrl}" class="!text-white no-underline inline-flex items-center justify-center w-full sm:w-[171px] h-[48px] sm:h-[54px] bg-[#2E2E2E] hover:bg-[#333] hover:scale-[1.02] active:scale-[0.98] text-white uppercase text-[14px] sm:text-[16px] lg:text-[18px] font-medium tracking-wide transition-all duration-200 ease-out">
+                                    READ MORE
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `;
+        }
+
+        function buildRecentBlogCard(blog) {
+            const blogId = blog?.id != null ? String(blog.id) : '';
+            const title = escapeHtml(String(blog?.title || 'Untitled'));
+            const image = escapeHtml(String(blog?.image || cardImageFallback));
+            const dateValue = blog?.createdAt || blog?.updatedAt;
+            const date = escapeHtml(formatDisplayDate(dateValue) || 'Date unavailable');
+            const detailUrl = `view-detail.html?id=${encodeURIComponent(blogId)}`;
+
+            return `
+                <a href="${detailUrl}" class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                    <div class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                        <img src="${image}" alt="${title}" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                        <h3 class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-3">${title}</h3>
+                        <span class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">${date}</span>
+                    </div>
+                </a>
+            `;
+        }
+
+async function loadViewsByCategory() {
+
+    const params = new URLSearchParams(window.location.search);
+    const categoryParam = params.get("category");
+
+    let headingText = "All Topics";
+
+    try {
+
+        const categoriesResponse = await fetch(categoriesApiUrl);
+        const categories = await categoriesResponse.json();
+
+        renderViewsCategories(categories);
+
+        let selectedCategoryId = null;
+
+        if (categoryParam) {
+            const match = categoryParam.match(/-(\d+)$/);
+
+            if (match) {
+                selectedCategoryId = Number(match[1]);
+
+                const selectedCategory = categories.find(
+                    cat => cat.id === selectedCategoryId
+                );
+
+                if (selectedCategory) {
+                    headingText = selectedCategory.name;
+                }
+            }
+        }
+
+   
+        viewsCategoryHeading.textContent = headingText.toUpperCase();
+
+  
+        const blogsResponse = await fetch(blogsApiBase);
+        const blogs = await blogsResponse.json();
+
+
+        const filteredBlogs = selectedCategoryId
+            ? blogs.filter(blog => blog.categoryId === selectedCategoryId)
+            : blogs;
+
+        if (!filteredBlogs.length) {
+            viewsBlogGrid.innerHTML =
+                `<p class="text-white text-center col-span-full">No views found.</p>`;
+            return;
+        }
+
+        viewsBlogGrid.innerHTML = filteredBlogs.map(buildBlogCard).join("");
+
+    } catch (error) {
+        console.error("Error loading views:", error);
+    }
+}
+        loadViewsByCategory();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

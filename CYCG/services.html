@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYCG | Services</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/svg/logo.svg" />
+    <link href="./output.css" rel="stylesheet">
+</head>
+<style>
+    #views-dropdown {
+        transition: height 600ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: height;
+    }
+
+    .service-content {
+        max-height: 0;
+        margin-top: 0;
+        opacity: 0;
+        overflow: hidden;
+        transform: translateY(-8px);
+        transition: max-height 450ms ease, margin-top 300ms ease, opacity 250ms ease, transform 250ms ease;
+    }
+
+    .service-content.is-open {
+        margin-top: 1.5rem;
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<body class="min-h-screen page-gradient-dark-to-light">
+    <header class="fixed top-0 left-0 w-full z-50">
+        <div
+            class="absolute top-0 left-0 w-full h-[128px] z-10 bg-[linear-gradient(180deg,#080808_0%,rgba(8,8,8,0.5)_50%,rgba(8,8,8,0)_100%)]">
+        </div>
+        <div class="z-50 max-w-[1920px] mx-auto py-6 px-4 lg:px-20 flex items-center justify-between text-white">
+            <nav class="z-50 hidden md:flex gap-12 uppercase text-sm tracking-wide">
+                <a href="index.html" class="!text-white link-underline text-[19px]">Home</a>
+                <a href="about.html" class="!text-white link-underline text-[19px]">About Us</a>
+                <a href="services.html" class="!text-white link-underline link-underline-active text-[19px]">Services</a>
+                <button type="button" id="views-toggle"
+                    class="!text-white link-underline text-[19px] uppercase cursor-pointer bg-transparent border-none text-inherit font-inherit p-0">Views</button>
+            </nav>
+            <a class="z-50" href="index.html"><img src="./assets/svg/logo.svg" alt="CYCG"
+                    class="z-50 h-12 lg:h-16 lg:mr-20" /></a>
+            <div class="hidden lg:flex items-center gap-4 text-[#EBEBEB]">
+                <nav class="z-50">
+                    <a href="./contact.html "
+                        class="z-50 uppercase link-underline cursor-pointer text-[19px] text-[rgba(235, 235, 235, 1)] !text-white no-underline">Connect
+                        with us</a>
+                </nav>
+                <div class="z-50 flex items-center gap-3">
+                    <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                            src="./assets/svg/linkedin.svg" alt="linkedin" class="w-8 h-8 cursor-pointer"></a>
+                    <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                            src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                    <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                        <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                    </a>
+                </div>
+            </div>
+            <button id="mobile-menu-btn"
+                class="md:hidden z-50 flex flex-col gap-1.5 w-8 h-8 justify-center items-center cursor-pointer"
+                aria-label="Toggle menu">
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
+            </button>
+        </div>
+        <div id="mobile-menu"
+            class="fixed inset-0 z-[100] bg-[#080808] transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="relative w-full h-full">
+                <button id="mobile-menu-close"
+                    class="absolute top-6 right-4 z-[101] w-8 h-8 flex items-center justify-center cursor-pointer"
+                    aria-label="Close menu">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+                <nav class="flex flex-col items-center justify-center h-full gap-8">
+                    <a href="index.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide !text-white !no-underline">Home</a>
+                    <a href="about.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide !text-white !no-underline">About
+                        Us</a>
+                    <a href="services.html"
+                        class="mobile-nav-link text-white uppercase text-2xl tracking-wide !text-white !no-underline">Services</a>
+                    <a href="views.html" class="mobile-nav-link text-white uppercase text-2xl tracking-wide !text-white !no-underlines">Views</a>
+                </nav>
+            </div>
+        </div>
+        <div id="views-dropdown" class="fixed top-0 left-0 w-full h-0 z-40">
+        </div>
+    </header>
+    <main id="views-source" class="hidden views-page-gradient" aria-hidden="true">
+        <div class="pt-6 pb-6">
+            <div class="max-w-[1320px] mx-auto mb-1">
+                <div
+                    class="flex flex-col gap-8 md:gap-0 lg:flex-row lg:flex-nowrap lg:gap-0 xl:gap-0 items-start justify-between">
+                    <div class="px-4 md:px-0 w-full lg:flex-1 lg:max-w-[400px] xl:max-w-[420px] flex-shrink-0">
+                        <h1
+                            class="font-kiona font-normal uppercase text-[40px] sm:text-[50px] md:text-[80px] leading-[90%] tracking-normal text-[#EBEBEB] mb-3">
+                            Views</h1>
+                        <p class="text-[#EBEBEB] font-inter text-[16px] leading-relaxed">A curated collection of CYCG's
+                            perspectives, offering clear, actionable thinking on the forces shaping business today and
+                            tomorrow.</p>
+                    </div>
+                    <div
+                        class="px-4 md:px-0 flex flex-col gap-1.5 sm:gap-2 w-full lg:w-auto min-w-full md:min-w-[420px] lg:max-w-[820px] xl:max-w-[860px] flex-shrink-0">
+                        <a href="views.html"
+                            class="px-5 py-3 sm:px-6 sm:py-4 bg-[#111111] hover:bg-[#2E2E2E] border border-[#333333] rounded-full text-[#EBEBEB] text-[14px] sm:text-[16px] font-normal transition-colors whitespace-nowrap !text-white no-underline">All
+                            Topics</a>
+                        <div id="views-category-list" class="contents"></div>
+                    </div>
+                    <div
+                        class="px-4 md:px-0 w-full lg:w-auto lg:max-w-[320px] xl:max-w-[380px] flex-shrink-0 lg:text-right">
+                        <h2
+                            class="font-kiona font-normal text-left lg:font-semibold uppercase text-[20px] sm:text-[24px] lg:text-[28px] xl:text-[32px] leading-[90%] tracking-normal text-[#EBEBEB] mb-2 lg:mb-3">
+                            Recent Views</h2>
+                        <div class="flex flex-col gap-2.5 sm:gap-3 lg:gap-3 xl:gap-4">
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img.webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img (1).webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                            <a href="view-detail.html"
+                                class="flex gap-3 p-3 sm:p-4 bg-[#242424] hover:bg-[#2A2A2A] rounded-[16px] transition-colors text-left">
+                                <div
+                                    class="flex-shrink-0 w-[100px] h-[75px] sm:w-[110px] sm:h-[85px] lg:w-[90px] lg:h-[90px] xl:w-[100px] xl:h-[100px] rounded-[10px] overflow-hidden">
+                                    <img src="./assets/img/blog img (2).webp" alt="" class="w-full h-full object-cover"
+                                        loading="lazy">
+                                </div>
+                                <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <h3
+                                        class="text-white font-medium text-[14px] sm:text-[15px] lg:text-[16px] leading-snug mb-0.5 line-clamp-2">
+                                        Why every board needs a strategic partner: The power of...</h3>
+                                    <span
+                                        class="text-[#818181] text-[12px] sm:text-[13px] lg:text-[14px] font-normal">31st
+                                        Jan 2026</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="views-close-btn"
+                class="mx-auto mb-10 flex items-center justify-center w-7 h-7 rounded-full border border-[#333] text-[#EBEBEB] transition hover:bg-[#1a1a1a]"
+                aria-label="Close Views menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="1.75">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- <div
+        class="fixed bottom-4 right-4 z-[9999] rounded-full flex items-center justify-center bg-[#1E1E1E]/20 backdrop-blur-sm">
+        <img src="./assets/svg/chat.svg" alt="chat icon" class="ml-2 mt-2 h-14 md:h-16">
+    </div> -->
+    <main>
+        <section
+            class="relative  h-[470px]  bg-[url('./assets/img/hand-sand.webp')]  md:bg-[url('./assets/svg/service.svg')]  bg-top bg-cover bg-no-repeat overflow-hidden">
+            <div
+                class="relative z-20  max-w-full md:max-w-[1320px] mx-auto px-6 min-[768px]:px-6 max-[1120px]:px-6 md:px-0 flex flex-col justify-end pb-7 md:pb-24 h-full">
+                <h1
+                    class="font-kionasmall font-normal  uppercase text-[56px] lg:text-[100px] leading-[90%] tracking-[0] text-white">
+                    Services
+                </h1>
+            </div>
+            <div class="gradient-box absolute bottom-0 w-full md:hidden"> </div>
+        </section>
+        <section data-reveal="left">
+            <div class=" max-w-full md:max-w-[1320px] mx-auto px-6 py-12 md:px-0 md:pt-12 md:pb-[100px]">
+                <div class=" text-[#EBEBEB] text-[15px] md:text-[18px] leading-[140%]">
+                    <p class="mb-4">
+                        At CYCG, we know that every organization’s journey is unique. Challenges often arise at the
+                        intersection of leadership, operations, and growth, and our role is to help you navigate that
+                        complexity with clarity and purpose. Our services are designed to meet organizations where they
+                        are today and guide them toward where they need to be tomorrow—stronger, more resilient, and
+                        ready for what’s next.
+                    </p>
+                    <p class="mb-4">
+                        We deliver more than frameworks—we provide practical, actionable solutions that generate
+                        measurable results. Whether you are looking to strengthen board governance, execute high-stakes
+                        projects, develop future-ready talent, safeguard enterprise value, or realign organizational
+                        strategy, CYCG offers the expertise and partnership to make it happen
+                    </p>
+                    <p>
+                        At every stage, our focus remains the same: translating vision into execution, and execution
+                        into sustainable growth. Explore our service areas to see how CYCG can help your organization
+                        lead with confidence and deliver results that matter.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-0 pb-0 md:pb-[60px] pt-[56px] overflow-hidden" data-reveal="left"
+            data-reveal-delay="120ms">
+            <div
+                class="w-full max-w-full md:max-w-[1320px] px-6 md:px-0 mx-auto relative z-10 font-kiona flex flex-col gap-4">
+
+                <p class="text-left text-[24px] leading-[140%] font-[400] text-[#EBEBEB] mt-2">
+                    Where enterprise expertise, results-driven solutions, and future-ready strategies converge for your
+                    success.
+                </p>
+            </div>
+            <div class=" z-10 px-6 py-12 overflow-hidden">
+                <img src="./assets/img/ptrn.webp" alt="" aria-hidden="true"
+                    class="pointer-events-none select-none absolute inset-0 w-full h-full object-cover opacity-20 z-0">
+                <div
+                    class="w-full max-w-full md:max-w-[1320px] mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    <div data-service-card class="card-gradient-border relative overflow-hidden"
+                        style="box-shadow: inset 0 -8px 8px rgba(0, 0, 0, 0.32); background: #232323;">
+                        <img src="./assets/img/ptrn (5).webp" alt="" aria-hidden="true"
+                            class="absolute top-0 right-0 z-0 rounded-[24px]">
+                        <div class="relative z-10 py-10 px-8">
+                            <div class="flex items-center  justify-between">
+                                <img src="./assets/img/card-icon-1.webp" alt="Board Services Icon"
+                                    class="w-[64px] h-[64px] ">
+                                <button type="button"
+                                    class="service-toggle w-7 h-7 rounded-full border-2 bg-[#2E2E2E]/40 inline-flex items-center justify-center"
+                                    aria-expanded="false" aria-controls="service-content-board">
+                                    <svg class="service-chevron transition-transform duration-300" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M7 10l5 5 5-5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="text-[#EBEBEB] font-bold text-[30px] md:text-2xl mb-2 mt-4 md:my-4">Board
+                                Services</h3>
+                            <p class="text-[#EBEBEB] text-[18px] md:text-[22px] leading-[32px]">
+                                We empower boards with the insight, structure, and governance needed to drive lasting
+                                organizational success.
+                            </p>
+                            <div id="service-content-board"
+                                class="service-content text-[#EBEBEB] text-sm md:text-base leading-relaxed">
+                                <p class="font-semibold text-[20px] mb-2">Core Offerings:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-[18px] text-[#EBEBEB] leading-[28px]">
+                                    <li>Board recruiting and executive leadership development</li>
+                                    <li>Strategic board alignment and governance best practices</li>
+                                    <li>Comprehensive board effectiveness assessments and optimization strategies</li>
+                                </ul>
+                                <p class="font-semibold text-[20px] mb-2 mt-6">How CYCG Delivers Value:</p>
+                                <ul
+                                    class="list-disc font-normal text-[18px] pl-5 space-y-2 text-[#EBEBEB] leading-[28px]">
+                                    <li><span>Streamlined Board Recruitment:</span> We design and manage a robust
+                                        recruitment process that targets high-potential candidates aligned with
+                                        organizational needs, strategic priorities, and leadership culture.</li>
+                                    <li><span>Governance Alignment:</span> We strengthen governance frameworks by
+                                        embedding best practices, improving decision-making flow, and ensuring alignment
+                                        between board oversight and organizational strategy.</li>
+                                    <li><span>Leadership Development:</span> We deliver tailored training and coaching
+                                        that enhances board members capabilities, ensuring they are equipped to guide
+                                        sustainable growth and manage complex challenges.</li>
+                                    <li><span>Performance Optimization:</span> We conduct in-depth effectiveness
+                                        assessments and implement optimization strategies that translate into measurable
+                                        improvements in accountability, oversight, and board impact.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-service-card class="card-gradient-border relative overflow-hidden"
+                        style="box-shadow: inset 0 -8px 8px rgba(0, 0, 0, 0.32); background: #232323;">
+                        <img src="./assets/img/ptrn (6).webp" alt="" aria-hidden="true"
+                            class="absolute top-0 right-0 z-0 rounded-[24px]">
+                        <div class="relative z-10 py-10 px-8">
+                            <div class="flex items-center  justify-between">
+                                <img src="./assets/img/card-icon-2.webp" alt="Project Management Icon"
+                                    class="w-[64px] h-[64px] ">
+                                <button type="button"
+                                    class="service-toggle w-7 h-7 rounded-full border-2 bg-[#2E2E2E]/40 inline-flex items-center justify-center"
+                                    aria-expanded="false" aria-controls="service-content-project">
+                                    <svg class="service-chevron transition-transform duration-300" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M7 10l5 5 5-5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="text-[#EBEBEB] font-bold text-[30px] md:text-2xl mb-2 mt-4 md:my-4">Project
+                                Management
+                            </h3>
+                            <p class="text-[#EBEBEB] text-[18px] md:text-[22px] leading-[32px]">
+                                We orchestrate complex initiatives with precision, ensuring they align seamlessly with
+                                strategy, timelines, and measurable outcomes.
+                            </p>
+                            <div id="service-content-project"
+                                class="service-content text-[#EBEBEB] text-sm md:text-base leading-relaxed">
+                                <p class="font-semibold text-[20px] mb-2">Core Offerings:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-[18px] text-[#EBEBEB] leading-[28px]">
+                                    <li>Strategic project planning and execution</li>
+                                    <li>Change management and transformation planning</li>
+                                    <li>Stakeholder alignment and implementation support</li>
+                                </ul>
+                                <p class="font-semibold text-[20px] mb-2 mt-6">How CYCG Delivers Value:</p>
+                                <ul
+                                    class="list-disc font-normal text-[18px] pl-5 space-y-2 text-[#EBEBEB] leading-[28px]">
+                                    <li><span>Strategic Frameworks:</span> Develop robust project management
+                                        methodologies that ensure alignment with organizational goals.</li>
+                                    <li><span>Execution Excellence:</span> Lead cross-functional teams with precision to
+                                        deliver initiatives on time, within scope, and with measurable results.</li>
+                                    <li><span>Risk Management:</span> Identify and mitigate project risks with proactive
+                                        contingency planning to safeguard timelines and investments.</li>
+                                    <li><span>Stakeholder Engagement:</span> Drive clear, consistent communication
+                                        across all stakeholders to maintain alignment throughout the project lifecycle.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-service-card class="card-gradient-border relative overflow-hidden"
+                        style="box-shadow: inset 0 -8px 8px rgba(0, 0, 0, 0.32); background: #232323;">
+                        <img src="./assets/img/ptrn (7).webp" alt="" aria-hidden="true"
+                            class="absolute top-0 right-0 z-0 rounded-[24px]">
+                        <div class="relative z-10 py-10 px-8">
+                            <div class="flex items-center  justify-between">
+                                <img src="./assets/img/card-icon-3.webp" alt="Workforce Development Icon"
+                                    class="w-[64px] h-[64px] ">
+                                <button type="button"
+                                    class="service-toggle w-7 h-7 rounded-full border-2 bg-[#2E2E2E]/40 inline-flex items-center justify-center"
+                                    aria-expanded="false" aria-controls="service-content-workforce">
+                                    <svg class="service-chevron transition-transform duration-300" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M7 10l5 5 5-5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="text-[#EBEBEB] font-bold text-[30px] md:text-2xl mb-2 mt-4 md:my-4">Workforce
+                                Development
+                            </h3>
+                            <p class="text-[#EBEBEB] text-[18px] md:text-[22px] leading-[32px]">
+                                We build agile, future-ready talent pipelines that equip organizations with the skills
+                                to thrive in an evolving business landscape.
+                            </p>
+                            <div id="service-content-workforce"
+                                class="service-content text-[#EBEBEB] text-sm md:text-base leading-relaxed">
+                                <p class="font-semibold text-[20px] mb-2">Core Offerings:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-[18px] text-[#EBEBEB] leading-[28px]">
+                                    <li>Leadership development and executive coaching</li>
+                                    <li>Skills development and succession planning</li>
+                                    <li>Talent pipeline strategies for a future-ready workforce</li>
+                                </ul>
+                                <p class="font-semibold text-[20px] mb-2 mt-6">How CYCG Delivers Value:</p>
+                                <ul
+                                    class="list-disc font-normal text-[18px] pl-5 space-y-2 text-[#EBEBEB] leading-[28px]">
+                                    <li><span>Leadership Capability:</span> Deliver custom coaching and leadership
+                                        training that strengthens decision-making and executive impact.</li>
+                                    <li><span>Skills Growth:</span> Design and implement scalable skills development
+                                        programs across organizational levels to build core competencies.</li>
+                                    <li><span>Succession Planning:</span> Establish frameworks that ensure continuity
+                                        and long-term resilience in leadership pipelines.</li>
+                                    <li><span>Talent Sustainability:</span> Create integrated talent acquisition and
+                                        retention strategies that secure workforce adaptability and engagement.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-service-card class="card-gradient-border relative overflow-hidden"
+                        style="box-shadow: inset 0 -8px 8px rgba(0, 0, 0, 0.32); background: #232323;">
+                        <img src="./assets/img/ptrn (8).webp" alt="" aria-hidden="true"
+                            class="absolute top-0 right-0 z-0 rounded-[24px]">
+                        <div class="relative z-10 py-10 px-8">
+                            <div class="flex items-center  justify-between">
+                                <img src="./assets/img/card-icon-4.webp" alt="Enterprise Risk & Compliance Icon"
+                                    class="w-[64px] h-[64px] ">
+                                <button type="button"
+                                    class="service-toggle w-7 h-7 rounded-full border-2 bg-[#2E2E2E]/40 inline-flex items-center justify-center"
+                                    aria-expanded="false" aria-controls="service-content-risk">
+                                    <svg class="service-chevron transition-transform duration-300" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M7 10l5 5 5-5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="text-[#EBEBEB] font-bold text-[30px] md:text-2xl mb-2 mt-4 md:my-4">
+                                Enterprise Risk &amp; Compliance
+                            </h3>
+                            <p class="text-[#EBEBEB] text-[18px] md:text-[22px] leading-[32px]">
+                                We safeguard enterprise value by fortifying risk frameworks, strengthening compliance,
+                                and building resilience against emerging challenges.
+                            </p>
+                            <div id="service-content-risk"
+                                class="service-content text-[#EBEBEB] text-sm md:text-base leading-relaxed">
+                                <p class="font-semibold text-[20px] mb-2">Core Offerings:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-[18px] text-[#EBEBEB] leading-[28px]">
+                                    <li>Enterprise-wide risk assessment and mitigation strategies</li>
+                                    <li>Regulatory compliance management and audit readiness</li>
+                                    <li>Crisis management and corporate risk governance</li>
+                                </ul>
+                                <p class="font-semibold text-[20px] mb-2 mt-6">How CYCG Delivers Value:</p>
+                                <ul
+                                    class="list-disc font-normal text-[18px] pl-5 space-y-2 text-[#EBEBEB] leading-[28px]">
+                                    <li><span>Risk Visibility:</span> Conduct comprehensive assessments to identify
+                                        vulnerabilities across the enterprise.</li>
+                                    <li><span>Mitigation Strategies:</span> Develop and implement tailored safeguards
+                                        that protect operations and business integrity.</li>
+                                    <li><span>Regulatory Alignment:</span> Ensure compliance with federal, state, and
+                                        industry-specific regulations through proactive oversight.</li>
+                                    <li><span>Crisis Preparedness:</span> Support audit readiness and strengthen crisis
+                                        management frameworks to safeguard reputation and continuity.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-service-card class="card-gradient-border relative overflow-hidden md:col-span-2"
+                        style="box-shadow: inset 0 -8px 8px rgba(0, 0, 0, 0.32); background: #232323;">
+                        <img src="./assets/img/card-4.webp" alt="" aria-hidden="true"
+                            class="absolute top-0 right-0 z-0 rounded-[24px]">
+                        <div class="relative z-10 py-10 px-8">
+                            <div class="flex items-center  justify-between">
+                                <img src="./assets/img/card-icon-5.webp" alt="Organizational & Functional Strategy Icon"
+                                    class="w-[64px] h-[64px] ">
+                                <button type="button"
+                                    class="service-toggle w-7 h-7 rounded-full border-2 bg-[#2E2E2E]/40 inline-flex items-center justify-center"
+                                    aria-expanded="false" aria-controls="service-content-org">
+                                    <svg class="service-chevron transition-transform duration-300" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M7 10l5 5 5-5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <h3 class="text-[#EBEBEB] font-bold text-[30px] md:text-2xl mb-2 md:my-4 mt-5">
+                                Organizational &amp; Functional Strategy
+                            </h3>
+                            <p class="text-[#EBEBEB] text-[18px] md:text-[22px] leading-[32px] mt-2">
+                                We design strategies that align structure, leadership, and processes—unlocking
+                                efficiency, agility, and sustainable performance.
+                            </p>
+
+                            <div id="service-content-org"
+                                class="service-content text-[#EBEBEB] text-sm md:text-base leading-relaxed">
+                                <p class="font-semibold text-[20px] mb-2">Core Offerings:</p>
+                                <ul class="list-disc pl-5 space-y-1 text-[18px] text-[#EBEBEB] leading-[28px]">
+                                    <li>Business model transformation and operational alignment</li>
+                                    <li>Process optimization and cross-functional integration</li>
+                                    <li>Change management strategies to support business growth</li>
+                                </ul>
+                                <p class="font-semibold text-[20px] mb-2 mt-6">How CYCG Delivers Value:</p>
+                                <ul
+                                    class="list-disc font-normal text-[18px] pl-5 space-y-2 text-[#EBEBEB] leading-[28px]">
+                                    <li>
+                                        <span class="">Structural Efficiency:</span>
+                                        Evaluate and redesign organizational structures to align with growth and
+                                        efficiency goals.
+                                    </li>
+                                    <li>
+                                        <span class="">Process Excellence:</span>
+                                        Streamline operations through targeted process improvements and cross-functional
+                                        integration.
+                                    </li>
+                                    <li>
+                                        <span class="">Transformation Support:</span>
+                                        Build and execute change management strategies that minimize disruption and
+                                        accelerate adoption.
+                                    </li>
+                                    <li>
+                                        <span class="">Collaborative Leadership:</span>
+                                        Foster cross-functional collaboration that strengthens execution and supports
+                                        long-term scalability.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-0 md:pb-12  px-6 md:px-0">
+        <div class="max-w-[1320px] mx-auto  text-center text-white">
+            <div class=" flex flex-col md:flex-row rounded-[24px] border-2 border-[#2E2E2E]">
+                <div
+                    class="flex flex-col gap-4 p-4 py-8 border-r  border-[#2E2E2E] border-b-2  md:border-b-[0px]  tracking-wide w-full md:w-1/4 flex justify-center items-center">
+                    <img src="./assets/svg/logo.svg" alt="company logo">
+                    <div class="flex items-center justify-center">
+                        <p class="text-sm mr-4 text-inter font-[400]">subsidiary of</p>
+                        <img src="./assets/img/fyghtclub.webp" class="h-10" alt="fyght-club-logo">
+                    </div>
+                </div>
+                <div class="flex w-full md:w-3/4 flex-col  text-[#EBEBEB]">
+                    <div
+                        class="py-4 md:py-8 border-b-2 border-[#2E2E2E]   text-xs md:text-lg text-[rgba(235, 235, 235, 1)]  flex text-center justify-center gap-3 md:gap-7">
+                        <a href="index.html" class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Home</a>
+                        <a href="about.html" class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">About Us</a>
+                        <a href="services.html" class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Services</a>
+                        <a href="views.html" class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Views</a>
+                        <a href="privacy.html" class="!text-[#EBEBEB] no-underline cursor-pointer hover:text-white">Privacy Policy</a>
+                    </div>
+                    <div class="my-3 md:py-8  flex items-center gap-4 text-[#EBEBEB] justify-center ">
+
+                        <a href="./contact.html" class="!text-[#EBEBEB] uppercase no-underline text-sm md:text-lg text-[rgba(235, 235, 235, 1)]">
+                            Connect with us
+                        </a>
+
+                        <div class=" flex items-center gap-3">
+                            <a href="https://www.linkedin.com/company/cycgllc/ " target="_blank"><img
+                                    src="./assets/svg/linkedin.svg" alt="linkedin" class="w-8 h-8 cursor-pointer"></a>
+                            <a href=" https://www.instagram.com/cycgllc?igsh=NmdyaTd5eGxuN3h6 " target="_blank"><img
+                                    src="./assets/svg/insta.svg" alt="instagram" class="w-8 h-8 cursor-pointer"></a>
+                            <a href="mailto:info@cycgllc.com" aria-label="Send email">
+                                <img src="./assets/svg/mail.svg" alt="email" class="w-8 h-8 cursor-pointer">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm text-white mt-4 pb-6 md:pb-0">© 2025 CYCG | All Right Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const hamburgerSpans = mobileMenuBtn.querySelectorAll('span');
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
+            hamburgerSpans[0].style.transform = 'rotate(45deg) translateY(8px)';
+            hamburgerSpans[1].style.opacity = '0';
+            hamburgerSpans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.style.overflow = '';
+            hamburgerSpans[0].style.transform = '';
+            hamburgerSpans[1].style.opacity = '';
+            hamburgerSpans[2].style.transform = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu || e.target.closest('.mobile-nav-link')) {
+                if (e.target === mobileMenu) {
+                    closeMenu();
+                }
+            }
+        });
+
+        const serviceCards = document.querySelectorAll('[data-service-card]');
+        serviceCards.forEach((card) => {
+            const toggleBtn = card.querySelector('.service-toggle');
+            const content = card.querySelector('.service-content');
+            const chevron = card.querySelector('.service-chevron');
+
+            if (!toggleBtn || !content || !chevron) return;
+
+            const collapseContent = () => {
+                content.style.maxHeight = `${content.scrollHeight}px`;
+                requestAnimationFrame(() => {
+                    content.classList.remove('is-open');
+                    content.style.maxHeight = '0px';
+                });
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                chevron.classList.remove('rotate-180');
+            };
+
+            const expandContent = () => {
+                content.classList.add('is-open');
+                content.style.maxHeight = `${content.scrollHeight}px`;
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                chevron.classList.add('rotate-180');
+            };
+
+            toggleBtn.addEventListener('click', () => {
+                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    collapseContent();
+                    return;
+                }
+                expandContent();
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
