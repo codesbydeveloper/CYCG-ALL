@@ -21,5 +21,4 @@ function AuthCard({ title, subtitle, children, footer }) {
     </div>
   )
 }
-
 export default AuthCard
