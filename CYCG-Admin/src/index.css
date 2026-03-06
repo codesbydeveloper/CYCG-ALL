@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cinzel:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Kiona';
+  src:
+    local('Kiona Regular'),
+    local('Kiona-Regular'),
+    url('/font/Kiona-Regular.ttf') format('truetype'),
+    url('/fonts/Kiona-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kiona';
+  src:
+    local('Kiona SemiBold'),
+    local('Kiona-SemiBold'),
+    url('/font/Kiona-SemiBold.ttf') format('truetype'),
+    url('/fonts/Kiona-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  body {
+    @apply font-sans font-normal;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: Kiona, Inter, system-ui, sans-serif;
+}
+
+.font-kiona {
+  font-family: Kiona, Inter, system-ui, sans-serif;
+}
+
+.rich-editor .ql-editor {
+  min-height: 180px;
+  font-size: 14px;
+}
+
+.rich-editor .ql-toolbar {
+  border-color: #2e2e2e;
+  background: #161616;
+}
+
+.rich-editor .ql-container {
+  border-color: #2e2e2e;
+  background: #121212;
+}
+
+.rich-editor .ql-editor {
+  color: #e6e6e6;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 400;
+}
+
+.rich-editor .ql-toolbar .ql-picker,
+.rich-editor .ql-toolbar button {
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.ql-content-render img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+
+
+.ql-content-render-dark h1,
+.ql-content-render-dark h2,
+.ql-content-render-dark h3,
+.ql-content-render-dark h4,
+.ql-content-render-dark h5,
+.ql-content-render-dark h6 {
+  color: #ffffff;
+  margin: 1.25rem 0 0.75rem;
+  font-family: Kiona, Inter, system-ui, sans-serif;
+}
+
+.ql-content-render-dark p,
+.ql-content-render-dark li,
+.ql-content-render-dark blockquote {
+  color: #c9c9c9;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.ql-content-render-dark ul,
+.ql-content-render-dark ol {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+}
+
+
+.ql-content-render .ql-align-center {
+  text-align: center;
+}
+
+.ql-content-render .ql-align-right {
+  text-align: right;
+}
+
+.ql-content-render .ql-align-justify {
+  text-align: justify;
+}
+
+.ql-content-render a {
+  color: #3b82f6;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+.ql-content-render blockquote {
+  border-left: 4px solid #444;
+  padding-left: 12px;
+  margin: 12px 0;
+  font-style: italic;
+}
+
+.ql-content-render pre {
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.ql-content-render .ql-align-center {
+  text-align: center;
+}
+
+.ql-content-render .ql-align-right {
+  text-align: right;
+}
+
+.ql-content-render .ql-align-justify {
+  text-align: justify;
+}
+
+
+.ql-content-render strong {
+  font-weight: 700 !important;
+}
+
+.ql-content-render em {
+  font-style: italic;
+}
+
+.ql-content-render u {
+  text-decoration: underline;
+}
+
+.ql-content-render s {
+  text-decoration: line-through;
+}
+
+.ql-content-render ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.ql-content-render ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+.ql-content-render li {
+  margin: 0.25rem 0;
+}
+
+.ql-content-render a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+
+.ql-content-render code {
+  background: #1e1e1e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.ql-content-render .ql-indent-1 { padding-left: 2rem; }
+.ql-content-render .ql-indent-2 { padding-left: 4rem; }
+.ql-content-render .ql-indent-3 { padding-left: 6rem; }
+
+
+
+.ql-editor h1,
+.ql-content-render h1 {
+  font-size: 2rem;       
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+}
+
+.ql-editor h2,
+.ql-content-render h2 {
+  font-size: 1.5rem;    
+  font-weight: 600;
+}
+
+.ql-editor h3,
+.ql-content-render h3 {
+  font-size: 1.25rem;     
+  font-weight: 600;
+}
+.ql-content-render li[data-list="bullet"] {
+  list-style-type: disc;
+}
+
+.ql-content-render li[data-list="ordered"] {
+  list-style-type: decimal;
+}
+
+
